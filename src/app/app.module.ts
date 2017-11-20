@@ -12,36 +12,37 @@ import {ProfilePage} from "../pages/profile/profile";
 
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
+import {LoginPageModule} from "../pages/login/login.module";
+import { AuthService } from '../providers/auth-service/auth-service';
 
 
 @NgModule({
   declarations: [
     MyApp,
     TabsPage,
-    DiscoverPage,
     MyPlacesPage,
     MyDishesPage,
     AllDishesPage,
-    ProfilePage
   ],
   imports: [
     BrowserModule,
+    LoginPageModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     TabsPage,
-    DiscoverPage,
     MyPlacesPage,
     MyDishesPage,
-    AllDishesPage,
-    ProfilePage
+    AllDishesPage
+
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    AuthService
   ]
 })
 export class AppModule {
