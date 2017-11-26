@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController } from 'ionic-angular';
 import {AuthService} from "../../providers/auth-service/auth-service";
 
 /**
@@ -19,7 +19,7 @@ export class DiscoverPage {
   username = '';
   email = '';
 
-  constructor(private nav: NavController, private auth: AuthService) {
+  constructor(private navCtrl: NavController, private auth: AuthService) {
     let info = this.auth.getUserInfo();
 
     if (info) {
@@ -30,7 +30,7 @@ export class DiscoverPage {
 
   public logout() {
     this.auth.logout().subscribe(succ => {
-      this.nav.setRoot('LoginPage')
+      this.navCtrl.setRoot('LoginPage')
     });
   }
 

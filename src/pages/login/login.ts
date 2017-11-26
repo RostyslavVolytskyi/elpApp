@@ -13,10 +13,10 @@ export class LoginPage {
   loading: Loading;
   registerCredentials = { email: '', password: '' };
 
-  constructor(private nav: NavController, private auth: AuthService, private alertCtrl: AlertController, private loadingCtrl: LoadingController) { }
+  constructor(private navCtrl: NavController, private auth: AuthService, private alertCtrl: AlertController, private loadingCtrl: LoadingController) { }
 
   public createAccount() {
-    this.nav.push('RegisterPage');
+    this.navCtrl.push('RegisterPage');
   }
 
   public login() {
@@ -25,8 +25,8 @@ export class LoginPage {
       console.log('login', success);
         if (success) {
           this.auth.currentUser = new User(success.user.firstName, success.user.email);
-          this.nav.setRoot('DiscoverPage');
-          this.nav.popToRoot();
+          this.navCtrl.setRoot('DiscoverPage');
+          this.navCtrl.popToRoot();
         } else {
           this.showError("Access Denied");
         }

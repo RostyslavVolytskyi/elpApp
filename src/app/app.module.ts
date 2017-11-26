@@ -13,6 +13,9 @@ import {SplashScreen} from '@ionic-native/splash-screen';
 import {LoginPageModule} from "../pages/login/login.module";
 import { AuthService } from '../providers/auth-service/auth-service';
 import {HttpClientModule} from "@angular/common/http";
+import {LoginNetworksPageModule} from "../pages/login-networks/login-networks.module";
+
+import { Facebook } from '@ionic-native/facebook';
 
 
 @NgModule({
@@ -27,6 +30,7 @@ import {HttpClientModule} from "@angular/common/http";
     BrowserModule,
     HttpClientModule,
     LoginPageModule,
+    LoginNetworksPageModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -42,7 +46,8 @@ import {HttpClientModule} from "@angular/common/http";
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AuthService
+    AuthService,
+    Facebook
   ]
 })
 export class AppModule {
