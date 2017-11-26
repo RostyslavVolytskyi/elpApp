@@ -1,6 +1,11 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import {HttpClient} from "@angular/common/http";
+import {BACKEND_API} from "../../config/apiCongig";
+import {RegisterCredentials} from "../../models/register-credentials.model";
+import {LoginCredentials} from "../../models/login-credentials.model";
+
 
 export class User {
   name: string;
@@ -16,29 +21,27 @@ export class User {
 export class AuthService {
   currentUser: User;
 
-  public login(credentials) {
+  constructor(private httpClient: HttpClient){}
+
+  public login(credentials: LoginCredentials): Observable<any> {
     if (credentials.email === null || credentials.password === null) {
       return Observable.throw("Please insert credentials");
     } else {
-      return Observable.create(observer => {
-        // At this point make a request to your backend to make a real check!
-        let access = (credentials.password === "pass" && credentials.email === "email");
-        this.currentUser = new User('Rosty', 'rosty@example.com');
-        observer.next(access);
-        observer.complete();
-      });
+      const email = credentials.email,
+        password = credentials.password;
+      return this.httpClient.post(BACKEND_API.login, {email, password});
     }
   }
 
-  public register(credentials) {
-    if (credentials.email === null || credentials.password === null) {
-      return Observable.throw("Please insert credentials");
+  public register(credentials: RegisterCredentials): Observable<any>  {
+    if (credentials.email === null || credentials.password === null || credentials.firstName === null || credentials.lastName === null) {
+      return Observable.throw("Please insert all required fields");
     } else {
-      // At this point store the credentials to your backend!
-      return Observable.create(observer => {
-        observer.next(true);
-        observer.complete();
-      });
+      const email = credentials.email,
+        password = credentials.password,
+        firstName = credentials.firstName,
+        lastName = credentials.lastName;
+      return this.httpClient.post(BACKEND_API.signup, {email, password, firstName, lastName});
     }
   }
 

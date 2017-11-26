@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController, LoadingController, Loading, IonicPage } from 'ionic-angular';
-import {AuthService} from "../../providers/auth-service/auth-service";
+import {AuthService, User} from "../../providers/auth-service/auth-service";
+import {HttpErrorResponse} from "@angular/common/http";
+import {SuccessLogin} from "../../models/success-login.model";
 
 @IonicPage()
 @Component({
@@ -19,20 +21,22 @@ export class LoginPage {
 
   public login() {
     this.showLoading();
-    this.auth.login(this.registerCredentials).subscribe(allowed => {
-        if (allowed) {
+    this.auth.login(this.registerCredentials).subscribe((success: SuccessLogin) => {
+      console.log('login', success);
+        if (success) {
+          this.auth.currentUser = new User(success.user.firstName, success.user.email);
           this.nav.setRoot('DiscoverPage');
           this.nav.popToRoot();
         } else {
           this.showError("Access Denied");
         }
       },
-      error => {
-        this.showError(error);
+      (error: HttpErrorResponse) => {
+        this.showError(error.error.message);
       });
   }
 
-  showLoading() {
+  showLoading(): void {
     this.loading = this.loadingCtrl.create({
       content: 'Please wait...',
       dismissOnPageChange: true
@@ -40,7 +44,7 @@ export class LoginPage {
     this.loading.present();
   }
 
-  showError(text) {
+  showError(text): void {
     this.loading.dismiss();
 
     let alert = this.alertCtrl.create({
