@@ -22,7 +22,6 @@ export class LoginPage {
   public login() {
     this.showLoading();
     this.auth.login(this.registerCredentials).subscribe((success: SuccessLogin) => {
-      console.log('login', success);
         if (success) {
           this.auth.currentUser = new User(success.user.firstName, success.user.email);
           this.navCtrl.setRoot('DiscoverPage');
