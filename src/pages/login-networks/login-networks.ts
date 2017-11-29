@@ -59,7 +59,7 @@ export class LoginNetworksPage {
             }
           },
           (error: HttpErrorResponse) => {
-            this.showPopup("Error", error.error.message);
+            this.showPopup("Error", error.message);
           });
     });
   }
