@@ -16,6 +16,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {LoginNetworksPageModule} from "../pages/login-networks/login-networks.module";
 
 import { Facebook } from '@ionic-native/facebook';
+import {GooglePlus} from "@ionic-native/google-plus";
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { Facebook } from '@ionic-native/facebook';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthService,
-    Facebook
+    Facebook,
+    GooglePlus
   ]
 })
 export class AppModule {
