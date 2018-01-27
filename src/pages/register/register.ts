@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, AlertController, IonicPage } from 'ionic-angular';
 import {AuthService, User} from "../../providers/auth-service/auth-service";
 import {HttpErrorResponse} from "@angular/common/http";
+import {TabsPage} from "../tabs/tabs";
 
 @IonicPage()
 @Component({
@@ -19,7 +20,7 @@ export class RegisterPage {
         if (success) {
           this.auth.currentUser = new User(success.user.firstName, success.user.email);
           this.createSuccess = true;
-          this.navCtrl.setRoot('DiscoverPage');
+          this.navCtrl.setRoot(TabsPage);
           this.showPopup("Success", "Account created.");
         } else {
           this.showPopup("Error", "Problem creating account.");

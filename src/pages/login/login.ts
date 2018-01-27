@@ -3,6 +3,7 @@ import { NavController, AlertController, LoadingController, Loading, IonicPage }
 import {AuthService, User} from "../../providers/auth-service/auth-service";
 import {HttpErrorResponse} from "@angular/common/http";
 import {SuccessLogin} from "../../models/success-login.model";
+import {TabsPage} from "../tabs/tabs";
 
 @IonicPage()
 @Component({
@@ -24,8 +25,12 @@ export class LoginPage {
     this.auth.login(this.registerCredentials).subscribe((success: SuccessLogin) => {
         if (success) {
           this.auth.currentUser = new User(success.user.firstName, success.user.email);
-          this.navCtrl.setRoot('DiscoverPage');
-          this.navCtrl.popToRoot();
+          this.navCtrl.setRoot(TabsPage);
+          // this.navCtrl.popToRoot();
+          // this.navCtrl.setRoot(TabsPage);
+
+          // this.navCtrl.setRoot('DiscoverPage');
+          // this.navCtrl.popToRoot();
         } else {
           this.showError("Access Denied");
         }
