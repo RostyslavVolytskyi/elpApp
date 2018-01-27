@@ -17,15 +17,19 @@ import {LoginNetworksPageModule} from "../pages/login-networks/login-networks.mo
 
 import { Facebook } from '@ionic-native/facebook';
 import {GooglePlus} from "@ionic-native/google-plus";
+import {ProfilePage} from "../pages/profile/profile";
+import {DiscoverPage} from "../pages/discover/discover";
 
 
 @NgModule({
   declarations: [
     MyApp,
     TabsPage,
+    DiscoverPage,
     MyPlacesPage,
     MyDishesPage,
     AllDishesPage,
+    ProfilePage
   ],
   imports: [
     BrowserModule,
@@ -38,8 +42,10 @@ import {GooglePlus} from "@ionic-native/google-plus";
   entryComponents: [
     MyApp,
     TabsPage,
+    DiscoverPage,
     MyPlacesPage,
     MyDishesPage,
+    ProfilePage,
     AllDishesPage
 
   ],
